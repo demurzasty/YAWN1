@@ -1,0 +1,24 @@
+#pragma once 
+
+#include <YAWN/Platform.hpp>
+
+#include "CommonSDL2.hpp"
+
+namespace YAWN {
+    class PlatformSDL2 : public PlatformImpl {
+    public:
+        PlatformSDL2();
+
+        ~PlatformSDL2();
+
+        void DispatchEvents() override;
+
+        bool IsOpen() const override;
+
+        void* WindowHandle() const override;
+
+    private:
+        SDL_Window* _window = nullptr;
+        bool _open = true;
+    };
+}
