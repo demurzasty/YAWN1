@@ -174,7 +174,7 @@ namespace YAWN {
             _size = 0;
         }
 
-        void Resize(usize size) {
+        void Resize(usize size, T defaultValue = T()) {
             if (size > _capacity) {
                 Reserve(size);
             }
@@ -184,7 +184,7 @@ namespace YAWN {
             }
 
             for (usize i = _size; i < size; ++i) {
-                new (_data + i) T();
+                new (_data + i) T(defaultValue);
             }
 
             _size = size;

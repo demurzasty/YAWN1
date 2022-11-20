@@ -12,7 +12,7 @@ Sprite::~Sprite() {
 }
 
 void Sprite::LateUpdate(float32 timeStep) {
-    Node2D::LateUpdate(timeStep);
+    CanvasItem::LateUpdate(timeStep);
 
     if (_dirty) {
         if (Texture()) {

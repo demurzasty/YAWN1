@@ -10,8 +10,6 @@ void CommonSDL2::Retain() {
     if (counter++ == 0) {
         SDL_Init(SDL_INIT_EVERYTHING);
     }
-
-    main;
 }
 
 void CommonSDL2::Release() {

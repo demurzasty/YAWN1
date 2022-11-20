@@ -1,7 +1,14 @@
 #include <YAWN/Memory.hpp>
 #include <YAWN/Error.hpp>
 
+#ifdef YAWN_SDL2
+#include <SDL.h>
+#define malloc SDL_malloc
+#define realloc SDL_realloc
+#define free SDL_free
+#else
 #include <stdlib.h>
+#endif
 
 using namespace YAWN;
 

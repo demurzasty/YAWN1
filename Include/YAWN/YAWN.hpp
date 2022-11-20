@@ -34,6 +34,8 @@
 #include "String.hpp"
 #include "Texture.hpp"
 #include "Thread.hpp"
+#include "TileMap.hpp"
+#include "TileMapData.hpp"
 #include "TypeInfo.hpp"
 #include "TypeTraits.hpp"
 #include "Variant.hpp"

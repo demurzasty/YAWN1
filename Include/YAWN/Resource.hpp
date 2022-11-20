@@ -1,6 +1,7 @@
 #pragma once 
 
 #include "Managed.hpp"
+#include "String.hpp"
 
 namespace YAWN {
     class Resource : public Reference {

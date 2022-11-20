@@ -1,7 +1,6 @@
 #pragma once 
 
 #include "Resource.hpp"
-#include "String.hpp"
 
 namespace YAWN {
     class Image : public Resource {

@@ -1,7 +1,14 @@
 #include <YAWN/String.hpp>
 #include <YAWN/FNV1a.hpp>
 
+#ifdef YAWN_SDL2
+#include <SDL.h>
+#define strlen SDL_strlen
+#define memcpy SDL_memcpy
+#define strcmp SDL_strcmp
+#else
 #include <string.h>
+#endif
 
 using namespace YAWN;
 

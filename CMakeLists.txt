@@ -40,6 +40,8 @@ add_library (YAWN STATIC
 	"Source/String.cpp"
 	"Source/Texture.cpp"
 	"Source/Thread.cpp"
+	"Source/TileMap.cpp"
+	"Source/TileMapData.cpp"
 	"Source/Variant.cpp"
 	"Source/Vector2.cpp"
 )
@@ -47,5 +49,9 @@ target_compile_features (YAWN PUBLIC cxx_std_17)
 target_include_directories (YAWN PUBLIC "Include")
 target_link_libraries (YAWN PRIVATE STB SDL2-static SDL2main)
 target_compile_definitions (YAWN PUBLIC YAWN_SDL2)
+
+if (WIN32)
+	target_compile_definitions (YAWN PRIVATE NOMINMAX _CRT_SECURE_NO_WARNINGS)
+endif ()
 
 add_subdirectory ("Example")
