@@ -1,7 +1,6 @@
 #include "PlatformSDL2.hpp"
 
 #ifdef _WIN32
-
 #include <Windows.h>
 
 static void SetProcessDpiAware() {
@@ -49,8 +48,21 @@ PlatformSDL2::PlatformSDL2() {
 	SetProcessDpiAware();
 
     CommonSDL2::Retain();
+
+	const String& windowTitle = Settings::WindowTitle();
+	int32 windowX = SDL_WINDOWPOS_CENTERED;
+	int32 windowY = SDL_WINDOWPOS_CENTERED;
+	int32 windowWidth = Settings::WindowWidth();
+	int32 windowHeight = Settings::WindowHeight();
+	bool windowFullscreen = Settings::WindowFullscreen();
+
+	uint32 windowFlags = SDL_WINDOW_ALLOW_HIGHDPI;
+
+	if (windowFullscreen) {
+		windowFlags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+	}
     
-    _window = SDL_CreateWindow("YAWN", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_ALLOW_HIGHDPI);
+    _window = SDL_CreateWindow(windowTitle.CStr(), windowX, windowY, windowWidth, windowHeight, windowFlags);
 }
 
 PlatformSDL2::~PlatformSDL2() {

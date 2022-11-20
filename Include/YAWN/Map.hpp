@@ -26,8 +26,8 @@ namespace YAWN {
     public:
         Map() = default;
 
-        Map(const Map<TKey, TValue>&) = delete;
-        Map<TKey, TValue>& operator=(const Map<TKey, TValue>&) = delete;
+        Map(const Map<TKey, TValue>&) = default;
+        Map<TKey, TValue>& operator=(const Map<TKey, TValue>&) = default;
 
         void Insert(const TKey& key, const TValue& value) {
             usize index = BinarySearch(key);
@@ -43,6 +43,10 @@ namespace YAWN {
             }
 
             return false;
+        }
+
+        void Clear() {
+            _array.Clear();
         }
 
         bool Contains(const TKey& key) const {

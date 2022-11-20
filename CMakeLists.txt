@@ -12,9 +12,13 @@ add_library (YAWN STATIC
 	"Source/SDL2/PlatformSDL2.cpp"
 	"Source/SDL2/ThreadSDL2.cpp"
 	
+	"Source/Win32/DirectoryMonitorWin32.cpp"
+
 	"Source/Application.cpp"
 	"Source/CanvasItem.cpp"
 	"Source/Clock.cpp"
+	"Source/Color.cpp"
+	"Source/DirectoryMonitor.cpp"
 	"Source/GraphicsDevice.cpp"
 	"Source/GraphicsResource.cpp"
 	"Source/Hash.cpp"
@@ -22,21 +26,26 @@ add_library (YAWN STATIC
 	"Source/Image.cpp"
 	"Source/Logger.cpp"
 	"Source/Main.cpp"
+	"Source/Math.cpp"
 	"Source/Memory.cpp"
 	"Source/Mutex.cpp"
 	"Source/Node.cpp"
 	"Source/Node2D.cpp"
+	"Source/Platform.cpp"
 	"Source/Reference.cpp"
+	"Source/Reflection.cpp"
 	"Source/Scene.cpp"
+	"Source/Settings.cpp"
 	"Source/Sprite.cpp"
 	"Source/String.cpp"
 	"Source/Texture.cpp"
 	"Source/Thread.cpp"
+	"Source/Variant.cpp"
 	"Source/Vector2.cpp"
-	"Source/Platform.cpp"
 )
 target_compile_features (YAWN PUBLIC cxx_std_17)
 target_include_directories (YAWN PUBLIC "Include")
 target_link_libraries (YAWN PRIVATE STB SDL2-static SDL2main)
+target_compile_definitions (YAWN PUBLIC YAWN_SDL2)
 
 add_subdirectory ("Example")

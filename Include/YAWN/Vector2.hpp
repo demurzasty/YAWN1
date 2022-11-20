@@ -11,6 +11,11 @@ namespace YAWN {
 
         Vector2(float32 x, float32 y) : X(x), Y(y) {}
 
+        Vector2(const Vector2&) = default;
+
+        Vector2& operator=(const Vector2&) = default;
+
+
     public:
         static Vector2 Zero;
         static Vector2 One;

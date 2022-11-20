@@ -9,6 +9,8 @@ Array<Function<void(float)>> Application::_updates;
 Array<Function<void(float)>> Application::_fixedUpdates;
 
 void Application::Setup() {
+    Settings::Setup();
+
     AddService<Platform>();
     AddService<GraphicsDevice>();
     AddService<Scene>();

@@ -7,7 +7,7 @@
 
 namespace YAWN {
     template<class T>
-    class Array : public NonCopyable {
+    class Array {
     public:
         Array() = default;
 
@@ -31,11 +31,39 @@ namespace YAWN {
             }
         }
 
+        Array(const Array<T>& array)
+            : _capacity(array._size), _size(array._size) {
+            _data = Memory::Allocate<T>(_size);
+
+            for (usize i = 0; i < _size; ++i) {
+                new (_data + i) T(array[i]);
+            }
+        }
+
         Array(Array<T>&& array)
             : _data(array._data), _capacity(array._capacity), _size(array._size) {
             array._data = nullptr;
             array._capacity = 0;
             array._size = 0;
+        }
+
+        Array<T>& operator=(const Array<T>& array) noexcept {
+            for (usize i = 0; i < _size; ++i) {
+                (_data + i)->~T();
+            }
+
+            _size = array._size;
+
+            if (_capacity < _size) {
+                _data = Memory::Reallocate<T>(_data, _size);
+                _capacity = _size;
+            }
+
+            for (usize i = 0; i < _size; ++i) {
+                new (_data + i) T(array[i]);
+            }
+
+            return *this;
         }
 
         Array<T>& operator=(Array<T>&& array) noexcept {
@@ -61,6 +89,29 @@ namespace YAWN {
             }
 
             Memory::Deallocate(_data);
+        }
+
+        template<class Func>
+        void Sort(Func comparator) {
+            if (_size == 0) {
+                return;
+            }
+
+            for (usize i = 0; i < _size - 1; i++) {
+                for (usize j = 0; j < _size - i - 1; j++) {
+                    if (comparator(_data[j], _data[j + 1])) {
+                        T temp = _data[j];
+                        _data[j] = _data[j + 1];
+                        _data[j + 1] = temp;
+                    }
+                }
+            }
+        }
+
+        void Sort() {
+            Sort([](const T& a, const T& b) -> bool {
+                return a < b;
+            });
         }
 
         void PushBack(const T& value) {

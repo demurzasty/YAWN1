@@ -1,6 +1,7 @@
 #pragma once 
 
 #include <YAWN/Platform.hpp>
+#include <YAWN/Settings.hpp>
 
 #include "CommonSDL2.hpp"
 

@@ -1,7 +1,9 @@
 #pragma once 
 
 #include <YAWN/GraphicsDevice.hpp>
+#include <YAWN/Settings.hpp>
 #include <YAWN/IdPool.hpp>
+#include <YAWN/Math.hpp>
 
 #include "CommonSDL2.hpp"
 
@@ -48,6 +50,7 @@ namespace YAWN {
 
     private:
         SDL_Renderer* _renderer;
+        Color _clearColor;
 
         IdPool _canvasItemPool;
         IdPool _textureIdPool;
