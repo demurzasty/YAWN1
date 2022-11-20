@@ -6,9 +6,9 @@
 namespace YAWN {
     class Texture : public GraphicsResource {
     public:
-        static Texture* FromFile(const String& filename);
+        static Managed<Texture> FromFile(const String& filename);
 
-        static Texture* FromImage(Image* image);
+        static Managed<Texture> FromImage(Image* image);
 
         Texture();
 

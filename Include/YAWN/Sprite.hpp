@@ -12,9 +12,9 @@ namespace YAWN {
 
         virtual void LateUpdate(float32 timeStep) override;
 
-        void SetTexture(Texture* texture);
+        void SetTexture(Managed<Texture> texture);
 
-        Texture* Texture();
+        const Managed<Texture>& Texture();
 
         void SetOffset(const Vector2& offset);
 

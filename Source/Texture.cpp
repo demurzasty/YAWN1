@@ -3,16 +3,16 @@
 
 using namespace YAWN;
 
-Texture* Texture::FromFile(const String& filename) {
+Managed<Texture> Texture::FromFile(const String& filename) {
     Managed<Image> image = Image::FromFile(filename);
     CheckReturnValue(image, nullptr, "Cannot load texture from: %s.", filename.CStr());
     return FromImage(image);
 }
 
-Texture* Texture::FromImage(Image* image) {
+Managed<Texture> Texture::FromImage(Image* image) {
     CheckReturnValue(image, nullptr, "No input image.");
 
-    Texture* texture = new Texture();
+    Managed<Texture> texture = new Texture();
     texture->SetData(image->Data(), image->Width(), image->Height());
     return texture;
 }

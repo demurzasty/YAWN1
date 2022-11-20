@@ -83,12 +83,12 @@ void Sprite::LateUpdate(float32 timeStep) {
     }
 }
 
-void Sprite::SetTexture(YAWN::Texture* texture) {
+void Sprite::SetTexture(Managed<YAWN::Texture> texture) {
     _texture = texture;
     _dirty = true;
 }
 
-Texture* Sprite::Texture() {
+const Managed<Texture>& Sprite::Texture() {
     return _texture;
 }
 
