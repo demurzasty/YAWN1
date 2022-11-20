@@ -161,14 +161,6 @@ void GraphicsDeviceSDL2::Present() {
                         int32(canvasItem.Vertices.Size()),
                         nullptr,
                         0);
-                } else {
-                    SDL_RenderCopyExF(_renderer,
-                        _textures[textureIndex],
-                        &canvasItem.Source,
-                        &canvasItem.Destination,
-                        canvasItem.Angle,
-                        &canvasItem.Center,
-                        SDL_FLIP_NONE);
                 }
             }
         }

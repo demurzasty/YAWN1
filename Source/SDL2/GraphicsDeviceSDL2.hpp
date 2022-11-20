@@ -12,10 +12,6 @@ namespace YAWN {
     public:
         struct CanvasItem {
             Array<SDL_Vertex> Vertices;
-            SDL_Rect Source = { 0, 0, 0, 0 };
-            SDL_FRect Destination = { 0.0f, 0.0f, 0.0f, 0.0f };
-            SDL_FPoint Center = { 0.0f, 0.0f };
-            float64 Angle = 0.0f;
             int32 Layer = 0;
             Id TextureId = None;
         };
