@@ -48,35 +48,33 @@ void GraphicsDeviceSDL2::DestroyCanvasItem(Id id) {
     _canvasItemPool.Dispose(id);
 }
 
-void GraphicsDeviceSDL2::SetCanvasItemSource(Id id, int32 x, int32 y, int32 width, int32 height) {
+void GraphicsDeviceSDL2::SetCanvasItemPrimitives(Id id, const Vector2* positions, const Color* colors, const Vector2* texcoords, usize size) {
     CheckReturn(_canvasItemPool.IsValid(id), "CanvasItem is not valid.");
+    CheckReturn(size == 0 || positions, "You must provide at least positions data of primitives.");
 
     usize index = usize(id);
-    _canvasItems[index].Source = { x, y, width, height };
+    Array<SDL_Vertex>& vertices = _canvasItems[index].Vertices;
 
-}
+    if (size > 0) {
+        vertices.Resize(size);
+        for (usize i = 0; i < size; ++i) {
+            vertices[i].position = { positions[i].X, positions[i].Y };
 
-void GraphicsDeviceSDL2::SetCanvasItemDestination(Id id, float32 x, float32 y, float32 width, float32 height) {
-    CheckReturn(_canvasItemPool.IsValid(id), "CanvasItem is not valid.");
+            if (colors) {
+                vertices[i].color = { colors[i].R, colors[i].G, colors[i].B, colors[i].A };
+            } else {
+                vertices[i].color = { 255, 255, 255, 255 };
+            }
 
-    usize index = usize(id);
-    _canvasItems[index].Destination = { x, y, width, height };
-}
-
-void GraphicsDeviceSDL2::SetCanvasItemCenter(Id id, float32 x, float32 y) {
-    CheckReturn(_canvasItemPool.IsValid(id), "CanvasItem is not valid.");
-
-    usize index = usize(id);
-    _canvasItems[index].Center = { x, y };
-
-}
-
-void GraphicsDeviceSDL2::SetCanvasItemRotation(Id id, float32 rotation) {
-    CheckReturn(_canvasItemPool.IsValid(id), "CanvasItem is not valid.");
-
-    usize index = usize(id);
-    _canvasItems[index].Angle = Math::RadiansToDegrees(rotation);
-
+            if (texcoords) {
+                vertices[i].tex_coord = { texcoords[i].X, texcoords[i].Y };
+            } else {
+                vertices[i].tex_coord = { 0.0f, 0.0f };
+            }
+        }
+    } else {
+        vertices.Clear();
+    }
 }
 
 void GraphicsDeviceSDL2::SetCanvasItemLayer(Id id, int32 layer) {
@@ -156,13 +154,22 @@ void GraphicsDeviceSDL2::Present() {
         if (canvasItem.TextureId != None) {
             usize textureIndex = usize(canvasItem.TextureId);
             if (_textures[textureIndex]) {
-                SDL_RenderCopyExF(_renderer,
-                    _textures[textureIndex],
-                    &canvasItem.Source,
-                    &canvasItem.Destination,
-                    canvasItem.Angle,
-                    &canvasItem.Center,
-                    SDL_FLIP_NONE);
+                if (canvasItem.Vertices.Size() > 0) {
+                    SDL_RenderGeometry(_renderer,
+                        _textures[textureIndex],
+                        canvasItem.Vertices.Data(),
+                        int32(canvasItem.Vertices.Size()),
+                        nullptr,
+                        0);
+                } else {
+                    SDL_RenderCopyExF(_renderer,
+                        _textures[textureIndex],
+                        &canvasItem.Source,
+                        &canvasItem.Destination,
+                        canvasItem.Angle,
+                        &canvasItem.Center,
+                        SDL_FLIP_NONE);
+                }
             }
         }
     }

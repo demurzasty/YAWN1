@@ -22,25 +22,60 @@ void Sprite::LateUpdate(float32 timeStep) {
             int32 frameWidth = textureWidth / HorizontalFrames();
             int32 frameHeight = textureHeight / VerticalFrames();
 
-            float32 centerX = Offset().X * Scale().X;
-            float32 centerY = Offset().Y * Scale().Y;
+            float32 offsetX = Offset().X * Scale().X;
+            float32 offsetY = Offset().Y * Scale().Y;
 
-            float32 destinationX = Position().X - centerX;
-            float32 destinationY = Position().Y - centerY;
+            float32 destinationX = Position().X - offsetX;
+            float32 destinationY = Position().Y - offsetY;
             float32 destinationWidth = frameWidth * Scale().X;
             float32 destinationHeight = frameHeight * Scale().Y;
+
+            float32 centerX = Position().X;
+            float32 centerY = Position().Y;
 
             int32 sourceX = (Frame() % HorizontalFrames()) * frameWidth;
             int32 sourceY = (Frame() / HorizontalFrames()) * frameHeight;
             int32 sourceWidth = frameWidth;
             int32 sourceHeight = frameHeight;
 
+            Vector2 positions[6] = {
+                Vector2(destinationX, destinationY),
+                Vector2(destinationX, destinationY + destinationHeight),
+                Vector2(destinationX + destinationWidth, destinationY + destinationHeight),
+
+                Vector2(destinationX + destinationWidth, destinationY + destinationHeight),
+                Vector2(destinationX + destinationWidth, destinationY),
+                Vector2(destinationX, destinationY),
+            };
+
+            for (Vector2& position : positions) {
+                position = position.RotateAroundPoint(Position(), Rotation());
+            }
+
+            Color colors[6] = {
+                Color::White,
+                Color::White,
+                Color::White,
+
+                Color::White,
+                Color::White,
+                Color::White,
+            };
+
+            Vector2 texcoords[6] = {
+                Vector2(float32(sourceX) / textureWidth, float32(sourceY) / textureHeight),
+                Vector2(float32(sourceX) / textureWidth, float32(sourceY + sourceHeight) / textureHeight),
+                Vector2(float32(sourceX + sourceWidth) / textureWidth, float32(sourceY + sourceHeight) / textureHeight),
+
+                Vector2(float32(sourceX + sourceWidth) / textureWidth, float32(sourceY + sourceHeight) / textureHeight),
+                Vector2(float32(sourceX + sourceWidth) / textureWidth, float32(sourceY) / textureHeight),
+                Vector2(float32(sourceX) / textureWidth, float32(sourceY) / textureHeight),
+            };
+
+            GraphicsDevice::SetCanvasItemPrimitives(_id, positions, colors, texcoords, 6);
             GraphicsDevice::SetCanvasItemTexture(_id, Texture()->Id());
-            GraphicsDevice::SetCanvasItemSource(_id, sourceX, sourceY, sourceWidth, sourceHeight);
-            GraphicsDevice::SetCanvasItemDestination(_id, destinationX, destinationY, destinationWidth, destinationHeight);
-            GraphicsDevice::SetCanvasItemCenter(_id, centerX, centerY);
-            GraphicsDevice::SetCanvasItemRotation(_id, Rotation());
         } else {
+            GraphicsDevice::SetCanvasItemPrimitives(_id, nullptr, nullptr, nullptr, 0);
             GraphicsDevice::SetCanvasItemTexture(_id, None);
         }
 

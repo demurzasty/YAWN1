@@ -1,13 +1,17 @@
 #include <YAWN/Platform.hpp>
 
+#ifdef YAWN_SDL2
 #include "SDL2/PlatformSDL2.hpp"
+#endif
 
 using namespace YAWN;
 
 PlatformImpl* Platform::_impl = nullptr;
 
 void Platform::Initialize() {
+#ifdef YAWN_SDL2
     _impl = new PlatformSDL2();
+#endif
 }
 
 void Platform::Release() {

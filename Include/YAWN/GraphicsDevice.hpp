@@ -4,6 +4,7 @@
 #include "Platform.hpp"
 #include "Mutex.hpp"
 #include "Vector2.hpp"
+#include "Color.hpp"
 
 namespace YAWN {
     class GraphicsDeviceImpl : public NonCopyable {
@@ -14,13 +15,7 @@ namespace YAWN {
 
         virtual void DestroyCanvasItem(Id id) = 0;
 
-        virtual void SetCanvasItemSource(Id id, int32 x, int32 y, int32 width, int32 height) = 0;
-
-        virtual void SetCanvasItemDestination(Id id, float32 x, float32 y, float32 width, float32 height) = 0;
-
-        virtual void SetCanvasItemCenter(Id id, float32 x, float32 y) = 0;
-
-        virtual void SetCanvasItemRotation(Id id, float32 rotation) = 0;
+        virtual void SetCanvasItemPrimitives(Id id, const Vector2* positions, const Color* colors, const Vector2* texcoords, usize size) = 0;
 
         virtual void SetCanvasItemLayer(Id id, int32 layer) = 0;
 
@@ -45,13 +40,7 @@ namespace YAWN {
 
         static void DestroyCanvasItem(Id id);
 
-        static void SetCanvasItemSource(Id id, int32 x, int32 y, int32 width, int32 height);
-
-        static void SetCanvasItemDestination(Id id, float32 x, float32 y, float32 width, float32 height);
-
-        static void SetCanvasItemCenter(Id id, float32 x, float32 y);
-
-        static void SetCanvasItemRotation(Id id, float32 rotation);
+        static void SetCanvasItemPrimitives(Id id, const Vector2* positions, const Color* colors, const Vector2* texcoords, usize size);
 
         static void SetCanvasItemLayer(Id id, int32 layer);
 

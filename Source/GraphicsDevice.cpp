@@ -1,6 +1,8 @@
 #include <YAWN/GraphicsDevice.hpp>
 
+#ifdef YAWN_SDL2
 #include "SDL2/GraphicsDeviceSDL2.hpp"
+#endif
 
 using namespace YAWN;
 
@@ -8,7 +10,9 @@ GraphicsDeviceImpl* GraphicsDevice::_impl = nullptr;
 Mutex GraphicsDevice::_mutex;
 
 void GraphicsDevice::Initialize() {
+#ifdef YAWN_SDL2
     _impl = new GraphicsDeviceSDL2();
+#endif
 }
 
 void GraphicsDevice::Release() {
@@ -27,28 +31,10 @@ void GraphicsDevice::DestroyCanvasItem(Id id) {
     _impl->DestroyCanvasItem(id);
 }
 
-void GraphicsDevice::SetCanvasItemSource(Id id, int32 x, int32 y, int32 width, int32 height) {
+void GraphicsDevice::SetCanvasItemPrimitives(Id id, const Vector2* positions, const Color* colors, const Vector2* texcoords, usize size) {
     Lock lock(_mutex);
 
-    _impl->SetCanvasItemSource(id, x, y, width, height);
-}
-
-void GraphicsDevice::SetCanvasItemDestination(Id id, float32 x, float32 y, float32 width, float32 height) {
-    Lock lock(_mutex);
-
-    _impl->SetCanvasItemDestination(id, x, y, width, height);
-}
-
-void GraphicsDevice::SetCanvasItemCenter(Id id, float32 x, float32 y) {
-    Lock lock(_mutex);
-
-    _impl->SetCanvasItemCenter(id, x, y);
-}
-
-void GraphicsDevice::SetCanvasItemRotation(Id id, float32 rotation) {
-    Lock lock(_mutex);
-
-    _impl->SetCanvasItemRotation(id, rotation);
+    _impl->SetCanvasItemPrimitives(id, positions, colors, texcoords, size);
 }
 
 void GraphicsDevice::SetCanvasItemLayer(Id id, int32 layer) {

@@ -11,6 +11,7 @@ namespace YAWN {
     class GraphicsDeviceSDL2 : public GraphicsDeviceImpl {
     public:
         struct CanvasItem {
+            Array<SDL_Vertex> Vertices;
             SDL_Rect Source = { 0, 0, 0, 0 };
             SDL_FRect Destination = { 0.0f, 0.0f, 0.0f, 0.0f };
             SDL_FPoint Center = { 0.0f, 0.0f };
@@ -28,13 +29,7 @@ namespace YAWN {
 
         void DestroyCanvasItem(Id id) override;
 
-        void SetCanvasItemSource(Id id, int32 x, int32 y, int32 width, int32 height) override;
-
-        void SetCanvasItemDestination(Id id, float32 x, float32 y, float32 width, float32 height) override;
-
-        void SetCanvasItemCenter(Id id, float32 x, float32 y) override;
-
-        void SetCanvasItemRotation(Id id, float32 rotation) override;
+        void SetCanvasItemPrimitives(Id id, const Vector2* positions, const Color* colors, const Vector2* texcoords, usize size) override;
 
         void SetCanvasItemLayer(Id id, int32 layer) override;
 

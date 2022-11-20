@@ -1,13 +1,13 @@
 #pragma once 
 
-#include "Core.hpp"
+#include "Math.hpp"
 
 namespace YAWN {
     class Vector2 {
     public:
         Vector2() = default;
 
-        explicit Vector2(float32 scalar) : X(scalar), Y(scalar) {}
+        explicit Vector2(float32 scalar);
 
         Vector2(float32 x, float32 y) : X(x), Y(y) {}
 
@@ -15,6 +15,7 @@ namespace YAWN {
 
         Vector2& operator=(const Vector2&) = default;
 
+        Vector2 RotateAroundPoint(const Vector2& point, float32 radians) const;
 
     public:
         static Vector2 Zero;

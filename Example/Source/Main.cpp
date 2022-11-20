@@ -7,11 +7,17 @@ public:
     virtual void Update(float32 timeStep) override {
         Sprite::Update(timeStep);
 
-        static int32 frame = 0;
-        SetFrame((frame / 4) % 4);
+        _time += timeStep;
+        while (_time > 0.1f) {
+            SetFrame((Frame() + 1) % 4);
+            _time -= 0.1f;
+        }
 
-        frame++;
+        SetRotation(Rotation() + timeStep);
     }
+
+private:
+    float32 _time = 0.0f;
 };
 
 static void Startup() {
