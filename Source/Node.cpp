@@ -33,3 +33,27 @@ Node* Node::Parent() const {
 ArrayView<const Managed<Node>> Node::Children() const {
     return _children;
 }
+
+int32 Node::Index() const {
+    // TODO: Index should be cached for performance reason.
+
+    if (!_parent) {
+        return 0;
+    }
+
+    for (usize i = 0; i < _parent->_children.Size(); ++i) {
+        if (_parent->_children[i] == this) {
+            return int32(i);
+        }
+    }
+
+    return 0;
+}
+
+int32 Node::GlobalIndex() const {
+    if (_parent) {
+        return Index() + _parent->GlobalIndex();
+    }
+
+    return Index();
+}

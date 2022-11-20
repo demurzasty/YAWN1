@@ -88,6 +88,9 @@ Variant& Variant::operator=(const Variant& variant) {
     case VariantType::String:
         new (_data) YAWN::String(variant.String());
         break;
+    case VariantType::Color:
+        new (_data) YAWN::Color(variant.Color());
+        break;
     case VariantType::Vector2:
         new (_data) YAWN::Vector2(variant.Vector2());
         break;
@@ -161,7 +164,7 @@ const String& Variant::String() const {
 
 const Color& Variant::Color() const {
     Assert(_type == VariantType::Color, "Invalid cast.");
-    return *(const YAWN::Variant*)_data;
+    return *reinterpret_cast<const YAWN::Color*>(_data);
 }
 
 const Vector2& Variant::Vector2() const {

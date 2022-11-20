@@ -5,9 +5,11 @@ using namespace YAWN;
 Map<String, Variant> Settings::_settings;
 
 void Settings::Setup() {
+    SetWindowTitle("YAWN");
     SetWindowWidth(1280);
     SetWindowHeight(720);
     SetWindowFullscreen(false);
+    SetVerticalSynchronization(true);
     SetCanvasWidth(320);
     SetCanvasHeight(180);
     SetCanvasClearColor(Color::CornflowerBlue);
@@ -26,8 +28,7 @@ void Settings::SetWindowTitle(const String& title) {
 }
 
 const String& Settings::WindowTitle() {
-    static String title = "YAWN";
-    return title;
+    return Get("WindowTitle").String();
 }
 
 void Settings::SetWindowWidth(int32 width) {
@@ -35,7 +36,7 @@ void Settings::SetWindowWidth(int32 width) {
 }
 
 int32 Settings::WindowWidth() {
-    return 1280;
+    return Get("WindowWidth");
 }
 
 void Settings::SetWindowHeight(int32 height) {
@@ -43,7 +44,7 @@ void Settings::SetWindowHeight(int32 height) {
 }
 
 int32 Settings::WindowHeight() {
-    return 720;
+    return Get("WindowHeight");
 }
 
 void Settings::SetWindowFullscreen(bool fullscreen) {
@@ -51,7 +52,7 @@ void Settings::SetWindowFullscreen(bool fullscreen) {
 }
 
 bool Settings::WindowFullscreen() {
-    return false;
+    return Get("WindowFullscreen");
 }
 
 void Settings::SetVerticalSynchronization(bool enable) {
@@ -59,7 +60,7 @@ void Settings::SetVerticalSynchronization(bool enable) {
 }
 
 bool Settings::VerticalSynchronization() {
-    return true;
+    return Get("VerticalSynchronization");
 }
 
 void Settings::SetCanvasWidth(int32 width) {
@@ -67,7 +68,7 @@ void Settings::SetCanvasWidth(int32 width) {
 }
 
 int32 Settings::CanvasWidth() {
-    return 320;
+    return Get("CanvasWidth");
 }
 
 void Settings::SetCanvasHeight(int32 height) {
@@ -75,7 +76,7 @@ void Settings::SetCanvasHeight(int32 height) {
 }
 
 int32 Settings::CanvasHeight() {
-    return 180;
+    return Get("CanvasHeight");
 }
 
 void Settings::SetCanvasClearColor(const Color& color) {
@@ -83,5 +84,5 @@ void Settings::SetCanvasClearColor(const Color& color) {
 }
 
 Color Settings::CanvasClearColor() {
-    return Color::CornflowerBlue;
+    return Get("CanvasClearColor");
 }

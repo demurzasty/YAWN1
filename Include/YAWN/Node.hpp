@@ -26,6 +26,10 @@ namespace YAWN {
 
         ArrayView<const Managed<Node>> Children() const;
 
+        int32 Index() const;
+        
+        int32 GlobalIndex() const;
+
     private:
         String _name;
         Node* _parent = nullptr;
