@@ -29,3 +29,7 @@ bool Platform::IsOpen() {
 void* Platform::WindowHandle() {
     return _impl->WindowHandle();
 }
+
+bool Platform::OpenURL(const String& url) {
+    return _impl->OpenURL(url);
+}

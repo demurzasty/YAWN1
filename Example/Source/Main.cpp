@@ -28,7 +28,6 @@ static void Startup() {
     sprite->SetHorizontalFrames(24);
     sprite->SetVerticalFrames(1);
     Scene::Root()->AddChild(sprite);
-
 }
 
 int Main(int argc, char* argv[]) {

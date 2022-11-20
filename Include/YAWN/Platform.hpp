@@ -1,6 +1,7 @@
 #pragma once 
 
 #include "Managed.hpp"
+#include "String.hpp"
 
 namespace YAWN {
     class PlatformImpl : public NonCopyable {
@@ -12,6 +13,8 @@ namespace YAWN {
         virtual bool IsOpen() const = 0;
 
         virtual void* WindowHandle() const = 0;
+
+        virtual bool OpenURL(const String& url) const = 0;
     };
 
     class Platform : public NonInstantiable {
@@ -25,6 +28,8 @@ namespace YAWN {
         static bool IsOpen();
 
         static void* WindowHandle();
+
+        static bool OpenURL(const String& url);
 
     private:
         static PlatformImpl* _impl;

@@ -18,6 +18,8 @@ namespace YAWN {
 
         void* WindowHandle() const override;
 
+        bool OpenURL(const String& url) const override;
+
     private:
         SDL_Window* _window = nullptr;
         bool _open = true;

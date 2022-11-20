@@ -88,3 +88,7 @@ void* PlatformSDL2::WindowHandle() const {
     return _window;
 }
 
+bool PlatformSDL2::OpenURL(const String& url) const {
+	return SDL_OpenURL(url.CStr()) == 0;
+}
+
