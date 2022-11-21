@@ -3,7 +3,7 @@
 using namespace YAWN;
 
 GraphicsDeviceSDL2::GraphicsDeviceSDL2()
-    : _canvasItems(1024), _textures(1024), _clearColor(Settings::CanvasClearColor()) {
+    : _canvasItems(8192), _textures(8192), _clearColor(Settings::CanvasClearColor()) {
     CommonSDL2::Retain();
 
     SDL_Window* window = (SDL_Window*)Platform::WindowHandle();

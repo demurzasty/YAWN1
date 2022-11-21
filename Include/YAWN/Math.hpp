@@ -15,6 +15,12 @@ namespace YAWN {
 
         static float32 DegreesToRadians(float32 degrees);
 
+        static float32 Floor(float32 value);
+
+        static float32 Ceil(float32 value);
+
+        static float32 Round(float32 value);
+
         static float32 Sin(float32 radians);
 
         static float32 Cos(float32 radians);

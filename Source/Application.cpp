@@ -13,6 +13,7 @@ void Application::Setup() {
 
     AddService<Platform>();
     AddService<GraphicsDevice>();
+    AddService<ResourceManager>();
     AddService<Scene>();
 }
 

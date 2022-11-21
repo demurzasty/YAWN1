@@ -27,6 +27,7 @@
 #include "Reference.hpp"
 #include "Reflection.hpp"
 #include "Resource.hpp"
+#include "ResourceManager.hpp"
 #include "Scene.hpp"
 #include "Settings.hpp"
 #include "Signal.hpp"

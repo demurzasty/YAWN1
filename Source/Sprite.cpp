@@ -1,15 +1,8 @@
 #include <YAWN/Sprite.hpp>
 #include <YAWN/GraphicsDevice.hpp>
+#include <YAWN/Math.hpp>
 
 using namespace YAWN;
-
-Sprite::Sprite() {
-    _id = GraphicsDevice::CreateCanvasItem();
-}
-
-Sprite::~Sprite() {
-    GraphicsDevice::DestroyCanvasItem(_id);
-}
 
 void Sprite::LateUpdate(float32 timeStep) {
     CanvasItem::LateUpdate(timeStep);
@@ -72,11 +65,11 @@ void Sprite::LateUpdate(float32 timeStep) {
                 Vector2(float32(sourceX) / textureWidth, float32(sourceY) / textureHeight),
             };
 
-            GraphicsDevice::SetCanvasItemPrimitives(_id, positions, colors, texcoords, 6);
-            GraphicsDevice::SetCanvasItemTexture(_id, Texture()->Id());
+            GraphicsDevice::SetCanvasItemPrimitives(Handle(), positions, colors, texcoords, 6);
+            GraphicsDevice::SetCanvasItemTexture(Handle(), Texture()->Id());
         } else {
-            GraphicsDevice::SetCanvasItemPrimitives(_id, nullptr, nullptr, nullptr, 0);
-            GraphicsDevice::SetCanvasItemTexture(_id, None);
+            GraphicsDevice::SetCanvasItemPrimitives(Handle(), nullptr, nullptr, nullptr, 0);
+            GraphicsDevice::SetCanvasItemTexture(Handle(), None);
         }
 
         _dirty = false;
@@ -126,4 +119,10 @@ void Sprite::SetFrame(int32 frame) {
 
 int32 Sprite::Frame() const {
     return _frame;
+}
+
+void Sprite::OnTransformChanged() {
+    CanvasItem::OnTransformChanged();
+
+    _dirty = true;
 }

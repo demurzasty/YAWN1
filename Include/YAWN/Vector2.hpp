@@ -15,6 +15,12 @@ namespace YAWN {
 
         Vector2& operator=(const Vector2&) = default;
 
+        Vector2 operator+(const Vector2& vector) const;
+
+        Vector2 operator*(const Vector2& vector) const;
+
+        Vector2 operator*(float32 scalar) const;
+
         Vector2 RotateAroundPoint(const Vector2& point, float32 radians) const;
 
     public:

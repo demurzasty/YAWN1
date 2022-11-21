@@ -6,9 +6,7 @@
 namespace YAWN {
     class Sprite : public CanvasItem {
     public:
-        Sprite();
-
-        virtual ~Sprite();
+        virtual ~Sprite() = default;
 
         virtual void LateUpdate(float32 timeStep) override;
 
@@ -32,8 +30,10 @@ namespace YAWN {
 
         int32 Frame() const;
 
+    protected:
+        virtual void OnTransformChanged() override;
+
     private:
-        Id _id = None;
         Managed<YAWN::Texture> _texture;
         Vector2 _offset = Vector2::Zero;
         int32 _horizontalFrames = 1;

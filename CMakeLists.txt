@@ -13,7 +13,9 @@ add_library (YAWN STATIC
 	"Source/SDL2/ThreadSDL2.cpp"
 	
 	"Source/Win32/DirectoryMonitorWin32.cpp"
-
+	
+	"Source/Animation.cpp"
+	"Source/AnimationPlayer.cpp"
 	"Source/Application.cpp"
 	"Source/CanvasItem.cpp"
 	"Source/Clock.cpp"
@@ -34,6 +36,7 @@ add_library (YAWN STATIC
 	"Source/Platform.cpp"
 	"Source/Reference.cpp"
 	"Source/Reflection.cpp"
+	"Source/ResourceManager.cpp"
 	"Source/Scene.cpp"
 	"Source/Settings.cpp"
 	"Source/Sprite.cpp"

@@ -1,6 +1,7 @@
 #include <YAWN/Math.hpp>
 
 #ifdef YAWN_SDL2
+
 #include <SDL.h>
 
 #define sinf SDL_sinf
@@ -9,6 +10,9 @@
 #define atan2f SDL_atan2f
 #define powf SDL_powf
 #define logf SDL_logf
+#define floorf SDL_floorf
+#define ceilf SDL_ceilf
+#define roundf SDL_roundf
 
 #else
 #include <math.h>
@@ -22,6 +26,18 @@ float32 Math::RadiansToDegrees(float32 radians) {
 
 float32 Math::DegreesToRadians(float32 degrees) {
     return degrees * 0.01745329251994329576923690768489f;
+}
+
+float32 Math::Floor(float32 value) {
+    return floorf(value);
+}
+
+float32 Math::Ceil(float32 value) {
+    return ceilf(value);
+}
+
+float32 Math::Round(float32 value) {
+    return roundf(value);
 }
 
 float32 Math::Sin(float32 radians) {
